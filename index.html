@@ -7,11 +7,26 @@
   <title>Hello GUI</title>
   <meta name="description" content="GUI for a Holochain app" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/kognise/water.css@latest/dist/dark.min.css" />
-  <script type="text/javascript" src="hc-web-client/hc-web-client-0.5.1.browser.min.js"></script>
 </head>
 
 <body>
-  <button>Say Hello</button>
+  <button onclick="hello()">Say Hello</button>
+
+  <script type="text/javascript" src="hc-web-client/hc-web-client-0.5.1.browser.min.js"></script>
+  <script type="text/javascript">
+    var holochain_connection = holochainclient.connect({
+      url: 'ws://localhost:3401',
+    })
+
+    function hello() {
+      holochain_connection.then(({ callZome, close }) => {
+        callZome('test-instance', 'hello', 'hello_holo')({ args: {} })
+          .then((result) => {
+            console.log(result)
+          })
+      })
+    }
+  </script>
 </body>
 
 </html>

@@ -11,6 +11,7 @@
 
 <body>
   <button onclick="hello()">Say Hello</button>
+  <div>Response: <span id="output"></span></div>
 
   <script type="text/javascript" src="hc-web-client/hc-web-client-0.5.1.browser.min.js"></script>
   <script type="text/javascript">
@@ -21,10 +22,14 @@
     function hello() {
       holochain_connection.then(({ callZome, close }) => {
         callZome('test-instance', 'hello', 'hello_holo')({ args: {} })
-          .then((result) => {
-            console.log(result)
-          })
+          .then((result) => showOutput(result))
       })
+    }
+
+    function showOutput(text) {
+      let span = document.getElementById('output')
+      let parsedText = JSON.parse(text)
+      span.textContent = parsedText.Ok;
     }
   </script>
 </body>

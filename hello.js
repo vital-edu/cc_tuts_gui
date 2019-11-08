@@ -1,5 +1,5 @@
 var holochain_connection = holochainclient.connect({
-  url: 'ws://localhost:3401',
+  url: 'ws://localhost:8888',
 })
 
 function hello() {

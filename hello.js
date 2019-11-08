@@ -45,3 +45,10 @@ function retrievePerson() {
     }).then((result) => showPerson(result))
   })
 }
+
+function update_port() {
+  let port = document.getElementById('port').value
+  holochain_connection = holochainclient.connect({
+    url: 'ws://localhost:' + port
+  })
+}
